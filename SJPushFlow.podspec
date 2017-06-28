@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = 'SJPushFlow'
-  s.version      = '1.0.0'
+  s.version      = '1.0.1'
   s.summary      = '推送逻辑处理'
   s.homepage     = 'https://github.com/869719206/SJTest'
   s.license      = 'MIT'
