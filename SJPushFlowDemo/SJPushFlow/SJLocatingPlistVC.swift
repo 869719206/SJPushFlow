@@ -9,13 +9,12 @@
 import UIKit
 
 enum PlistViewControllerError: Error {
-    case namePlaceError
-    case noCanChangeError
+    case namePlaceError  // 没有命名空间
+    case noCanChangeError  // 不可实例
 }
 
 enum PlistFindError: Error{
-    case noFandPathError
-
+    case noFandPathError  // 没有找到plist文件
 }
 
 
@@ -26,10 +25,10 @@ class SJLocatingPlistVC {
     
     
     /// 读取数据
-    func loadData() throws -> NSDictionary {
+    func loadData(plistName: String) throws -> NSDictionary {
         
         //获取数据文件地址
-        guard let path = Bundle.main.path(forResource: "PropertyList", ofType: "plist") else {
+        guard let path = Bundle.main.path(forResource: plistName, ofType: "plist") else {
            throw PlistFindError.noFandPathError
         }
         

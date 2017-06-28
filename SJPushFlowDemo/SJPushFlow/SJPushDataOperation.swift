@@ -6,6 +6,12 @@
 //  Copyright © 2017年 IAsk. All rights reserved.
 //
 
+/*
+ 修改本类 messagetype与vc 与你使用的plist文件key值对应即可
+ */
+
+
+
 import UIKit
 
 
@@ -13,9 +19,9 @@ public class SJPushDataOperation{
     
     internal static var dataOperation: PushDataOperation?
     
-    public class func registerApp(pushData: NSDictionary, isPushWeakApp: Bool){
+    public class func registerApp(plistName:String, pushData: NSDictionary, isPushWeakApp: Bool){
         
-        dataOperation = PushDataOperation(pushData: pushData, isPushWeakApp: isPushWeakApp)
+        dataOperation = PushDataOperation(plistName: plistName, pushData: pushData, isPushWeakApp: isPushWeakApp)
         
     }
     
@@ -27,7 +33,7 @@ class PushDataOperation {
     let rootVC: UIViewController!
     var plistVC: UIViewController!
     
-    init(pushData: NSDictionary, isPushWeakApp: Bool)
+    init(plistName: String,pushData: NSDictionary, isPushWeakApp: Bool)
     {
         
         // 查找当前主vc
@@ -35,7 +41,7 @@ class PushDataOperation {
         let locatingRoot = SJLocatingRootVC()
         rootVC = locatingRoot.getCurrentController(rootVC: (window?.rootViewController!)!)
         
-        self.locatingPlistVC(pushData: pushData)
+        self.locatingPlistVC(plistName: plistName,pushData: pushData)
         
         //  在locatingPlistVC已经赋值plistVC， 若plistVC为空 就没必要进行下面步骤
         if plistVC == nil {
@@ -62,12 +68,12 @@ class PushDataOperation {
     /// 查找plist文件里面的vc  并且实例化
     ///
     /// - Parameter pushData: 推送过来的数据   此步骤只需messageType字段 来查找对应vc
-    func locatingPlistVC(pushData: NSDictionary){
+    func locatingPlistVC(plistName: String,pushData: NSDictionary){
         
         let locatingPlist = SJLocatingPlistVC()
         
         do{
-             let dic = try locatingPlist.loadData()
+             let dic = try locatingPlist.loadData(plistName: plistName)
             
              let key = pushData.object(forKey: "messageType") as! String
             

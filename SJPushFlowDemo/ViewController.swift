@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     func buttonClick() {
         let dictionary:Dictionary<String,String> = ["messageType":"1","businessId":"1245243563656","alert":"你好"];
         
-        SJPushDataOperation.registerApp(pushData: dictionary as NSDictionary, isPushWeakApp: false)
+        SJPushDataOperation.registerApp(plistName: "PropertyList", pushData: dictionary as NSDictionary, isPushWeakApp: false)
     }
     
     
