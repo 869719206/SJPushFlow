@@ -19,6 +19,10 @@ public class SJPushDataOperation{
     
     internal static var dataOperation: PushDataOperation?
     
+    /// - Parameters:
+    ///   - plistName: plist文件名
+    ///   - pushData: 推送数据
+    ///   - isPushWeakApp: 在appDelegate里面判断是否是从外部push进入 isPushWeakApp是根据 判断 launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] 是否有值所赋值的
     public class func registerApp(plistName:String, pushData: NSDictionary, isPushWeakApp: Bool){
         
         dataOperation = PushDataOperation(plistName: plistName, pushData: pushData, isPushWeakApp: isPushWeakApp)
@@ -123,8 +127,6 @@ class PushDataOperation {
         
         if UIApplication.shared.applicationState == UIApplicationState.active
         {
-            // 在appDelegate里面判断是否是从外部push进入
-            // isPushWeakApp是根据 判断 launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] 是否有值所赋值的
             if (isPushWeakApp == true) {
                 return false;
             }
