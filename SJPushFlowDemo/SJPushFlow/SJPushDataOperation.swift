@@ -52,19 +52,17 @@ class PushDataOperation {
             return
         }
         
-        self.protocolViewController(pushData: pushData)
-        
         if self.applicationStateIsActive(isPushWeakApp: isPushWeakApp) == true
         {
             self.showAlertWithMessage(message: pushData.object(forKey: "alert") as! String, cancel: { (UIAlertAction) in
                 print("取消")
             }, goSee: { (UIAlertAction) in
-                self.vcSkip()
+                self.vcSkip(pushData: pushData)
             })
         }
         else
         {
-            self.vcSkip()
+            self.vcSkip(pushData: pushData)
         }
         
     }
@@ -107,7 +105,10 @@ class PushDataOperation {
     
 
     /// 页面跳转
-    func vcSkip(){
+    func vcSkip(pushData: NSDictionary){
+        
+        // 判断vc是否满足 更新数据协议
+        self.protocolViewController(pushData: pushData)
         
         if rootVC.navigationController != nil
         {
@@ -139,8 +140,6 @@ class PushDataOperation {
     }
     
     
-    
-    /// 判断vc是否满足 更新数据协议
     func protocolViewController(pushData: NSDictionary){
         if plistVC is SJPushDataVCProtocol {
             (plistVC as! SJPushDataVCProtocol).upData(pushData: pushData)
