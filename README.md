@@ -22,9 +22,9 @@ print(pushData)
 
 ## Installation with CocoaPods
 ```
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
-pod 'SJPushFlow', '~>1.0.2'
+pod 'SJPushFlow', '~>1.0.3'
 ```
 ## Architecture
 <p align="center" >
